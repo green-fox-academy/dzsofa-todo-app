@@ -11,8 +11,8 @@ public class Usage {
         try {
             List<String> allLines = Files.readAllLines( usagePath );
             for (String lines : allLines) {
-                System.console().writer().print(lines);
-                System.console().writer().println();
+                System.out.print(lines);
+                System.out.println();
             }
         } catch (IOException e) {
             e.printStackTrace();
