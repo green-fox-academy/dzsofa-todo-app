@@ -5,8 +5,9 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class Usage {
-      public static void writeLines(Path usagePath) {
-        usagePath = Paths.get( "/home/dzsofa/greenfox/dzsofa-todo-app/Assets/printusage.txt" );
+
+      public static void writeLines(String path) {
+        Path usagePath = Paths.get( path );
         try {
             List<String> allLines = Files.readAllLines( usagePath );
             for (String lines : allLines) {
