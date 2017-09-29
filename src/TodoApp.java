@@ -5,9 +5,6 @@ import java.util.List;
 
 public class TodoApp {
     public static void main(String[] args) {
-//        ArrayList<Task> tasks = new ArrayList<>();
-//        Path taskPath = Paths.get( "./Assets/tasks.txt" );
-//        Task myNewTask = null;
 
         if (args.length != 0) {
             if (args[0].equals("-l")) {
