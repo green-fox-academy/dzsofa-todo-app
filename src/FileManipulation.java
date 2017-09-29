@@ -30,14 +30,13 @@ public class FileManipulation {
     public static void append(String path, String newTask) {
         try {
             Path taskPath = Paths.get(path);
-            List<String> valami = new ArrayList<>();
-            valami.add("[ ] " + newTask);
-            Files.write(taskPath, valami, StandardOpenOption.APPEND);
+            List<String> taskList = new ArrayList<>();
+            taskList.add("[ ] " + newTask);
+            Files.write(taskPath, taskList, StandardOpenOption.APPEND);
             System.out.println("Added to the list.");
         } catch (IOException e) {
             System.out.println("Unable to write file: " + path);
         }
-        System.out.println("Add TODO");
     }
 
     public static void remove(String path, String arg) {
