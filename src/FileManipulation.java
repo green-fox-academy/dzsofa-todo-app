@@ -2,21 +2,80 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
 import java.util.List;
 
-public class Usage {
 
-      public static void writeLines(String path) {
-        Path usagePath = Paths.get( path );
+public class FileManipulation {
+
+    public static void printLines(String path, boolean printNr) {
+        Path usagePath = Paths.get(path);
         try {
-            List<String> allLines = Files.readAllLines( usagePath );
+            List<String> allLines = Files.readAllLines(usagePath);
+            int i = 1;
             for (String lines : allLines) {
+                if (printNr) {
+                    System.out.print(i + " - ");
+                }
                 System.out.print(lines);
                 System.out.println();
+                i++;
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void append(String path, String newTask) {
+        try {
+            Path taskPath = Paths.get(path);
+            List<String> valami = new ArrayList<>();
+            valami.add("[ ] " + newTask);
+            Files.write(taskPath, valami, StandardOpenOption.APPEND);
+            System.out.println("Added to the list.");
+        } catch (IOException e) {
+            System.out.println("Unable to write file: " + path);
+        }
+        System.out.println("Add task");
+    }
+
+    public static void remove(String path, String arg) {
+        System.out.println(arg);
+        int removeNr = Integer.parseInt(arg);
+        Path taskPath = Paths.get(path);
+        try {
+            List<String> allLines = Files.readAllLines(taskPath);
+            allLines.remove(removeNr - 1);
+            Files.write(taskPath, allLines);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Task removed");
+    }
+
+    public static void check(String path, String arg) {
+        System.out.println(arg);
+        int chekNr = Integer.parseInt(arg);
+        Path taskPath = Paths.get(path);
+        try {
+            List<String> allLines = Files.readAllLines(taskPath);
+            if (allLines.get(chekNr - 1).charAt(1) == 'X') {
+                StringBuilder checkLine = new StringBuilder(allLines.get(chekNr - 1));
+                checkLine.setCharAt(1, ' ');
+                allLines.set(chekNr - 1, checkLine.toString());
+                System.out.println("Task unchecked");
+            } else {
+                StringBuilder checkLine = new StringBuilder(allLines.get(chekNr - 1));
+                checkLine.setCharAt(1, 'X');
+                allLines.set(chekNr - 1, checkLine.toString());
+                System.out.println("Task completed");
+            }
+            Files.write(taskPath, allLines);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }
 
