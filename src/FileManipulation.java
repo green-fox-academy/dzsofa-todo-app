@@ -37,7 +37,7 @@ public class FileManipulation {
         } catch (IOException e) {
             System.out.println("Unable to write file: " + path);
         }
-        System.out.println("Add task");
+        System.out.println("Add TODO");
     }
 
     public static void remove(String path, String arg) {
@@ -51,7 +51,7 @@ public class FileManipulation {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Task removed");
+        System.out.println("TODO removed");
     }
 
     public static void check(String path, String arg) {
@@ -64,12 +64,12 @@ public class FileManipulation {
                 StringBuilder checkLine = new StringBuilder(allLines.get(chekNr - 1));
                 checkLine.setCharAt(1, ' ');
                 allLines.set(chekNr - 1, checkLine.toString());
-                System.out.println("Task unchecked");
+                System.out.println("TODO unchecked");
             } else {
                 StringBuilder checkLine = new StringBuilder(allLines.get(chekNr - 1));
                 checkLine.setCharAt(1, 'X');
                 allLines.set(chekNr - 1, checkLine.toString());
-                System.out.println("Task completed");
+                System.out.println("TODO completed");
             }
             Files.write(taskPath, allLines);
         } catch (IOException e) {
