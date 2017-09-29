@@ -1,4 +1,6 @@
-Walk the dog
-Buy milk
-Do homework
-heloka
+[ ] Buy milk
+[ ] Do homework
+[ ] heloka
+[ ] Feed the monkey
+[ ] watap
+[X] walk me home
