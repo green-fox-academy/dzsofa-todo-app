@@ -16,6 +16,15 @@ public class TodoApp {
                 FileManipulation.remove("./Assets/tasks.txt", args[1]);
             } else if (args[0].equals("-c")) {
                 FileManipulation.check("./Assets/tasks.txt", args[1]);
+            } else if (args[0].equals("-al")) {
+                FileManipulation.append("./Assets/tasks.txt", args[1]);
+                FileManipulation.printLines("./Assets/tasks.txt", true);
+            } else if (args[0].equals("-cl")) {
+                FileManipulation.check("./Assets/tasks.txt", args[1]);
+                FileManipulation.printLines("./Assets/tasks.txt", true);
+            } else if (args[0].equals("-rl")) {
+                FileManipulation.remove("./Assets/tasks.txt", args[1]);
+                FileManipulation.printLines("./Assets/tasks.txt", true);
             } else {
                 System.out.println("Unsupported argument\n");
             }
