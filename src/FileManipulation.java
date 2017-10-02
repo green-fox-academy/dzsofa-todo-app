@@ -45,12 +45,16 @@ public class FileManipulation {
         Path taskPath = Paths.get(path);
         try {
             List<String> allLines = Files.readAllLines(taskPath);
-            allLines.remove(removeNr - 1);
-            Files.write(taskPath, allLines);
+            if (removeNr <= allLines.size()) {
+                allLines.remove(removeNr - 1);
+                Files.write(taskPath, allLines);
+                System.out.println("TODO removed");
+            } else {
+                System.out.println("Unable to remove: index is out of bound");
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("TODO removed");
     }
 
     public static void check(String path, String arg) {
@@ -59,18 +63,22 @@ public class FileManipulation {
         Path taskPath = Paths.get(path);
         try {
             List<String> allLines = Files.readAllLines(taskPath);
-            if (allLines.get(chekNr - 1).charAt(1) == 'X') {
-                StringBuilder checkLine = new StringBuilder(allLines.get(chekNr - 1));
-                checkLine.setCharAt(1, ' ');
-                allLines.set(chekNr - 1, checkLine.toString());
-                System.out.println("TODO unchecked");
+            if (chekNr <= allLines.size()) {
+                if (allLines.get(chekNr - 1).charAt(1) == 'X') {
+                    StringBuilder checkLine = new StringBuilder(allLines.get(chekNr - 1));
+                    checkLine.setCharAt(1, ' ');
+                    allLines.set(chekNr - 1, checkLine.toString());
+                    System.out.println("TODO unchecked");
+                } else {
+                    StringBuilder checkLine = new StringBuilder(allLines.get(chekNr - 1));
+                    checkLine.setCharAt(1, 'X');
+                    allLines.set(chekNr - 1, checkLine.toString());
+                    System.out.println("TODO completed");
+                }
+                Files.write(taskPath, allLines);
             } else {
-                StringBuilder checkLine = new StringBuilder(allLines.get(chekNr - 1));
-                checkLine.setCharAt(1, 'X');
-                allLines.set(chekNr - 1, checkLine.toString());
-                System.out.println("TODO completed");
+                System.out.println("Unable to check: index is out of bound");
             }
-            Files.write(taskPath, allLines);
         } catch (IOException e) {
             e.printStackTrace();
         }
