@@ -1,6 +1,4 @@
 [ ] Buy milk
+[X] Feed the monkey
+[ ] cool
 [ ] Do homework
-[ ] heloka
-[ ] Feed the monkey
-[ ] watap
-[X] walk me home
